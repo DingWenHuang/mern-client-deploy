@@ -1,4 +1,5 @@
 import axios from "axios";
+// const API_URL = "http://localhost:8080/api/user";
 const API_URL = "https://mern-practice-server.onrender.com/api/user";
 
 class AuthService {
@@ -29,10 +30,10 @@ class AuthService {
     return token;
   }
 
-  updateUserById(_id, username, email) {
+  updateUserById(_id, username, email, password) {
     return axios.patch(
       API_URL + "/update/changeInfo/" + _id,
-      { username, email },
+      { username, email, password },
       { headers: { Authorization: this.getToken() } }
     );
   }

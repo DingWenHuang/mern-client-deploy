@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import AuthService from "../services/auth.service";
 
 const UpdatePasswordComponent = (props) => {
-  let { currentUser, setCurrentUser } = props;
+  let { currentUser, setCurrentUser, setIsLoading } = props;
   const navigate = useNavigate();
 
   let [oldpassword, setOldpassword] = useState("");
@@ -21,6 +21,7 @@ const UpdatePasswordComponent = (props) => {
     setNewpassword2(e.target.value);
   };
   const handleChangePassword = async () => {
+    setIsLoading(true);
     if (newpassword1 !== newpassword2) {
       return setMessage("輸入的兩次新密碼不相符，請重新確認");
     }
@@ -33,11 +34,12 @@ const UpdatePasswordComponent = (props) => {
         oldpassword,
         newpassword1
       );
+      setIsLoading(false);
       window.alert("密碼變更成功，請重新登入");
       AuthService.logout();
       navigate("/login");
     } catch (error) {
-      console.log(error);
+      setIsLoading(false);
       setMessage(error.response.data);
     }
   };

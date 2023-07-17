@@ -1,11 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import authService from "../services/auth.service";
+import loadingImg from "../images/loading.gif";
 
 const NavComponent = (props) => {
-  let { currentUser, setCurrentUser } = props;
+  let { currentUser, setCurrentUser, isLoading, setIsLoading } = props;
+
   return (
     <div>
+      {isLoading && (
+        <div
+          style={{
+            position: "absolute",
+            height: " 100%",
+            width: "100%",
+            top: "0",
+            left: "0",
+            backgroundColor: "rgba(255, 255, 255, 0.5)",
+            zIndex: "20",
+          }}
+        >
+          <img
+            style={{
+              position: "relative",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: "150px",
+              height: "150px",
+            }}
+            src={loadingImg}
+            alt="載入中..."
+          />
+        </div>
+      )}
       <nav>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <div className="container-fluid">

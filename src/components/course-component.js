@@ -3,7 +3,13 @@ import { useNavigate } from "react-router-dom";
 import CourseService from "../services/course.service";
 
 const CourseComponent = (props) => {
-  let { currentUser, setCurrentUser, currentCourse, setCurrentCourse } = props;
+  let {
+    currentUser,
+    setCurrentUser,
+    currentCourse,
+    setCurrentCourse,
+    setIsLoading,
+  } = props;
   const navigate = useNavigate();
 
   let [courseData, setCourseData] = useState(null);
@@ -11,11 +17,14 @@ const CourseComponent = (props) => {
 
   const handleUpdate = async (e) => {
     try {
+      setIsLoading(true);
       let result = await CourseService.getCourseById(e.target.id);
+      setIsLoading(false);
       localStorage.setItem("currentCourse", JSON.stringify(result.data));
       setCurrentCourse(CourseService.getCurrentCourse());
       navigate("/course/update");
     } catch (error) {
+      setIsLoading(false);
       setMessage(error.response.data);
     }
   };
@@ -28,10 +37,13 @@ const CourseComponent = (props) => {
     }
 
     try {
+      setIsLoading(true);
       await CourseService.deleteCourseById(e.target.id);
+      setIsLoading(false);
       window.alert("課程已刪除成功");
       navigate(0);
     } catch (error) {
+      setIsLoading(false);
       setMessage(error.response.data);
     }
   };
@@ -44,12 +56,14 @@ const CourseComponent = (props) => {
     }
 
     try {
+      setIsLoading(true);
       await CourseService.dropCourseById(e.target.id);
+      setIsLoading(false);
       window.alert("課程已退選成功");
       navigate(0);
     } catch (error) {
-      console.log(error);
-      // setMessage(error.response.data);
+      setIsLoading(false);
+      setMessage(error.response.data);
     }
   };
 
@@ -58,19 +72,25 @@ const CourseComponent = (props) => {
     if (currentUser) {
       _id = currentUser.user._id;
       if (currentUser.user.role === "instructor") {
+        setIsLoading(true);
         CourseService.getCoursesByInstructorId(_id)
           .then((data) => {
+            setIsLoading(false);
             setCourseData(data.data);
           })
           .catch((e) => {
+            setIsLoading(false);
             console.log(e);
           });
       } else if (currentUser.user.role === "student") {
+        setIsLoading(true);
         CourseService.getCoursesByStudentId(_id)
           .then((data) => {
+            setIsLoading(false);
             setCourseData(data.data);
           })
           .catch((e) => {
+            setIsLoading(false);
             console.log(e);
           });
       }

@@ -3,7 +3,13 @@ import { useNavigate } from "react-router-dom";
 import CourseService from "../services/course.service";
 
 const UpdateCourseComponent = (props) => {
-  let { currentUser, setCurrentUser, currentCourse, setCurrentCourse } = props;
+  let {
+    currentUser,
+    setCurrentUser,
+    currentCourse,
+    setCurrentCourse,
+    setIsLoading,
+  } = props;
   let [title, setTitle] = useState(currentCourse.title);
   let [description, setDescription] = useState(currentCourse.description);
   let [price, setPrice] = useState(currentCourse.price);
@@ -24,16 +30,19 @@ const UpdateCourseComponent = (props) => {
 
   const handleUpdate = async () => {
     try {
+      setIsLoading(true);
       await CourseService.updateCourseById(
         currentCourse._id,
         title,
         description,
         price
       );
+      setIsLoading(false);
       localStorage.removeItem("currentCourse");
       window.alert("課程更新成功");
       navigate("/course");
     } catch (error) {
+      setIsLoading(false);
       setMessage(error.response.data);
     }
   };

@@ -1,4 +1,5 @@
 import axios from "axios";
+// const API_URL = "http://localhost:8080/api/courses";
 const API_URL = "https://mern-practice-server.onrender.com/api/courses";
 
 class CourseService {

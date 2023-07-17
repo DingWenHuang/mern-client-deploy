@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import CourseService from "../services/course.service";
 
 const EnrollComponent = (props) => {
-  let { currentUser, setCurrentUser } = props;
+  let { currentUser, setCurrentUser, setIsLoading } = props;
   const navigate = useNavigate();
   let [searchInput, setSearchInput] = useState("");
   let [searchResult, setSearchResult] = useState(null);
@@ -21,18 +21,24 @@ const EnrollComponent = (props) => {
 
   const handleSearch = async () => {
     try {
+      setIsLoading(true);
       let result = await CourseService.getCourseByName(searchInput, sort);
+      setIsLoading(false);
       setSearchResult(result.data);
     } catch (error) {
+      setIsLoading(false);
       console.log(error);
     }
   };
   const handleEnroll = async (e) => {
     try {
+      setIsLoading(true);
       let result = await CourseService.enroll(e.target.id);
+      setIsLoading(false);
       window.alert("課程註冊成功。重新導向到課程頁面。");
       navigate("/course");
     } catch (e) {
+      setIsLoading(false);
       if (e.response.data) {
         window.alert(e.response.data);
       } else {

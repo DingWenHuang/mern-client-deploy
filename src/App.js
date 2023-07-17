@@ -20,6 +20,7 @@ function App() {
   let [currentCourse, setCurrentCourse] = useState(
     CourseService.getCurrentCourse()
   );
+  let [isLoading, setIsLoading] = useState(false);
 
   return (
     <BrowserRouter>
@@ -31,17 +32,23 @@ function App() {
               <Layout
                 currentUser={currentUser}
                 setCurrentUser={setCurrentUser}
+                isLoading={isLoading}
+                setIsLoading={setIsLoading}
               />
             }
           >
             <Route index element={<HomeComponent />} />
-            <Route path="/register" element={<RegisterComponent />} />
+            <Route
+              path="/register"
+              element={<RegisterComponent setIsLoading={setIsLoading} />}
+            />
             <Route
               path="/login"
               element={
                 <LoginComponent
                   currentUser={currentUser}
                   setCurrentUser={setCurrentUser}
+                  setIsLoading={setIsLoading}
                 />
               }
             />
@@ -60,6 +67,7 @@ function App() {
                 <UpdateUserComponent
                   currentUser={currentUser}
                   setCurrentUser={setCurrentUser}
+                  setIsLoading={setIsLoading}
                 />
               }
             />
@@ -69,6 +77,7 @@ function App() {
                 <UpdatePasswordComponent
                   currentUser={currentUser}
                   setCurrentUser={setCurrentUser}
+                  setIsLoading={setIsLoading}
                 />
               }
             />
@@ -80,6 +89,7 @@ function App() {
                   setCurrentUser={setCurrentUser}
                   currentCourse={currentCourse}
                   setCurrentCourse={setCurrentCourse}
+                  setIsLoading={setIsLoading}
                 />
               }
             />
@@ -91,6 +101,7 @@ function App() {
                   setCurrentUser={setCurrentUser}
                   currentCourse={currentCourse}
                   setCurrentCourse={setCurrentCourse}
+                  setIsLoading={setIsLoading}
                 />
               }
             />
@@ -100,6 +111,7 @@ function App() {
                 <PostCourseComponent
                   currentUser={currentUser}
                   setCurrentUser={setCurrentUser}
+                  setIsLoading={setIsLoading}
                 />
               }
             />
@@ -109,6 +121,7 @@ function App() {
                 <EnrollComponent
                   currentUser={currentUser}
                   setCurrentUser={setCurrentUser}
+                  setIsLoading={setIsLoading}
                 />
               }
             />

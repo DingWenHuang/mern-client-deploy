@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import AuthService from "../services/auth.service";
 
 const LoginComponent = (props) => {
-  let { currentUser, setCurrentUser } = props;
+  let { currentUser, setCurrentUser, isLoading, setIsLoading } = props;
   const navigate = useNavigate();
 
   let [email, setEmail] = useState("");
@@ -19,13 +19,15 @@ const LoginComponent = (props) => {
 
   const handleLogin = async () => {
     try {
+      setIsLoading(true);
       let result = await AuthService.login(email, password);
-      console.log(result.data);
+      setIsLoading(false);
       localStorage.setItem("user", JSON.stringify(result.data));
       setCurrentUser(AuthService.getCurrentUser());
       window.alert("登入成功，將導向到個人頁面");
       navigate("/profile");
     } catch (e) {
+      setIsLoading(false);
       setMessage(e.response.data);
     }
   };

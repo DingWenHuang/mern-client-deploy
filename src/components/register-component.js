@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import AuthService from "../services/auth.service";
 import { useNavigate } from "react-router-dom";
 
-const RegisterComponent = () => {
+const RegisterComponent = (props) => {
+  let { isLoading, setIsLoading } = props;
   const navigate = useNavigate();
 
   let [username, setUsername] = useState("");
@@ -26,10 +27,13 @@ const RegisterComponent = () => {
 
   const handleRegister = async () => {
     try {
+      setIsLoading(true);
       await AuthService.register(username, email, password, role);
+      setIsLoading(false);
       window.alert("註冊成功，將導向至登入頁面");
       navigate("/login");
     } catch (e) {
+      setIsLoading(false);
       setMessage(e.response.data);
     }
   };

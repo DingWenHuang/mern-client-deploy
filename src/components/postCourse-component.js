@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import CourseService from "../services/course.service";
 
 const PostCourseComponent = (props) => {
-  let { currentUser, setCurrentUser } = props;
+  let { currentUser, setCurrentUser, setIsLoading } = props;
   let [title, setTitle] = useState("");
   let [description, setDescription] = useState("");
   let [price, setPrice] = useState(0);
@@ -22,13 +22,15 @@ const PostCourseComponent = (props) => {
     setPrice(e.target.value);
   };
   const postCourse = () => {
+    setIsLoading(true);
     CourseService.post(title, description, price)
       .then(() => {
+        setIsLoading(false);
         window.alert("新課程已創建成功");
         navigate("/course");
       })
       .catch((error) => {
-        console.log(error.response);
+        setIsLoading(false);
         setMessage(error.response.data);
       });
   };

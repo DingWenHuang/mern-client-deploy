@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import AuthService from "../services/auth.service";
 
 const UpdateUserComponent = (props) => {
-  let { currentUser, setCurrentUser } = props;
+  let { currentUser, setCurrentUser, setIsLoading } = props;
   const navigate = useNavigate();
 
   let [username, setUsername] = useState(currentUser.user.username);
@@ -23,14 +23,22 @@ const UpdateUserComponent = (props) => {
 
   const handleUpdateUser = async () => {
     try {
-      await AuthService.updateUserById(currentUser.user._id, username, email);
+      setIsLoading(true);
+      let updateResult = await AuthService.updateUserById(
+        currentUser.user._id,
+        username,
+        email,
+        password
+      );
       AuthService.logout();
       let result = await AuthService.login(email, password);
       localStorage.setItem("user", JSON.stringify(result.data));
       setCurrentUser(AuthService.getCurrentUser());
+      setIsLoading(false);
       window.alert("個人資料更新成功");
       navigate("/profile");
     } catch (error) {
+      setIsLoading(false);
       setMessage(error.response.data);
     }
 
