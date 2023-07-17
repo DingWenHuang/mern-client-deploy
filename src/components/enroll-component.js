@@ -53,7 +53,7 @@ const EnrollComponent = (props) => {
 
   useEffect(() => {
     handleSearch();
-  }, [sort, searchInput]);
+  }, [sort]);
 
   // useEffect(() => {
   //   handleSearch();
