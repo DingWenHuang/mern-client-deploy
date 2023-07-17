@@ -41,7 +41,7 @@ const CourseComponent = (props) => {
       await CourseService.deleteCourseById(e.target.id);
       setIsLoading(false);
       window.alert("課程已刪除成功");
-      navigate("/course");
+      navigate(0);
     } catch (error) {
       setIsLoading(false);
       setMessage(error.response.data);
@@ -60,7 +60,7 @@ const CourseComponent = (props) => {
       await CourseService.dropCourseById(e.target.id);
       setIsLoading(false);
       window.alert("課程已退選成功");
-      navigate("/course");
+      navigate(0);
     } catch (error) {
       setIsLoading(false);
       setMessage(error.response.data);
