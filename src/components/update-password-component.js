@@ -21,7 +21,6 @@ const UpdatePasswordComponent = (props) => {
     setNewpassword2(e.target.value);
   };
   const handleChangePassword = async () => {
-    setIsLoading(true);
     if (newpassword1 !== newpassword2) {
       return setMessage("輸入的兩次新密碼不相符，請重新確認");
     }
@@ -29,6 +28,7 @@ const UpdatePasswordComponent = (props) => {
       return setMessage("您的新密碼不可與舊密碼相同");
     }
     try {
+      setIsLoading(true);
       await AuthService.changePassword(
         currentUser.user._id,
         oldpassword,
