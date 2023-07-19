@@ -77,6 +77,9 @@ const EnrollComponent = (props) => {
   };
 
   const handleSearch = () => {
+    if (!allCourses) {
+      return;
+    }
     let newArray = [];
     allCourses.map((course) => {
       if (
