@@ -144,7 +144,14 @@ const EnrollComponent = (props) => {
   // }, [searchInput]);
 
   return (
-    <div style={{ padding: "3rem" }}>
+    <div
+      style={{
+        padding: "3rem",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
       {!currentUser && (
         <div>
           <p>您必須先登入才能夠搜尋課程</p>
@@ -173,8 +180,9 @@ const EnrollComponent = (props) => {
           </button>
         </div>
       )}
+
       {currentUser && searchResult && searchResult.length != 0 && (
-        <div>
+        <div className="d-flex flex-column align-items-center justify-content-center">
           <div
             style={{
               display: "flex",
@@ -206,7 +214,13 @@ const EnrollComponent = (props) => {
             </div>
           </div>
 
-          <div style={{ display: "flex", flexWrap: "wrap" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              flexWrap: "wrap",
+            }}
+          >
             {searchResult.map((course) => (
               <div
                 key={course._id}
@@ -237,6 +251,7 @@ const EnrollComponent = (props) => {
           </div>
         </div>
       )}
+
       {currentUser &&
         showAllCourses &&
         allCourses &&
@@ -271,36 +286,6 @@ const EnrollComponent = (props) => {
                   <option value="price-asc">課程費用：由低到高</option>
                 </select>
               </div>
-            </div>
-
-            <div style={{ display: "flex", flexWrap: "wrap" }}>
-              {allCourses.map((course) => (
-                <div
-                  key={course._id}
-                  className="card"
-                  style={{ width: "18rem", margin: "0.5rem" }}
-                >
-                  <div className="card-body">
-                    <h5 className="card-title">課程名稱：{course.title}</h5>
-                    <p className="card-text">課程敘述：{course.description}</p>
-                    <p className="card-text">價格: {course.price}</p>
-                    <p className="card-text">
-                      講師: {course.instructor.username}
-                    </p>
-                    <p className="card-text">
-                      目前的學生人數: {course.studentLength}
-                    </p>
-                    <a
-                      href="#"
-                      onClick={handleEnroll}
-                      className="card-text btn btn-primary"
-                      id={course._id}
-                    >
-                      註冊課程
-                    </a>
-                  </div>
-                </div>
-              ))}
             </div>
           </div>
         )}

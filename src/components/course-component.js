@@ -114,113 +114,118 @@ const CourseComponent = (props) => {
           </button>
         </div>
       )}
-      {currentUser && currentUser.user.role === "student" && (
-        <div>
-          <h1>歡迎來到學生的課程頁面</h1>
-        </div>
-      )}
-      {currentUser && currentUser.user.role === "instructor" && (
-        <div>
-          <h1>歡迎來到講師的課程頁面</h1>
-        </div>
-      )}
 
-      {currentUser &&
-        currentUser.user.role === "instructor" &&
-        courseData &&
-        courseData.length != 0 && (
-          <div style={{ display: "flex", flexWrap: "wrap" }}>
-            {courseData.map((course, index) => {
-              return (
-                <div
-                  className="card"
-                  key={index}
-                  style={{ width: "18rem", margin: "1rem" }}
-                >
-                  <div className="card-body">
-                    <h5>課程名稱：{course.title}</h5>
-                    <p style={{ margin: "0.5rem 0rem" }}>
-                      課程敘述：{course.description}
-                    </p>
-                    <p style={{ margin: "0.5rem 0rem" }}>
-                      課程人數：{course.students.length}
-                    </p>
-                    <p style={{ margin: "0.5rem 0rem" }}>
-                      課程價格：{course.price}
-                    </p>
-                    <div
-                      className="buttons"
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-around",
-                      }}
-                    >
-                      <a
-                        href="#"
-                        className="card-text btn btn-primary"
-                        onClick={handleUpdate}
-                        id={course._id}
-                      >
-                        更新課程
-                      </a>
-                      <a
-                        href="#"
-                        className="card-text btn btn-danger"
-                        onClick={handleDelete}
-                        id={course._id}
-                      >
-                        刪除課程
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+      <div className="d-flex justify-content-center">
+        {currentUser && currentUser.user.role === "student" && (
+          <div>
+            <h1>歡迎來到學生的課程頁面</h1>
           </div>
         )}
-
-      {currentUser &&
-        currentUser.user.role === "student" &&
-        courseData &&
-        courseData.length != 0 && (
-          <div style={{ display: "flex", flexWrap: "wrap" }}>
-            {courseData.map((course, index) => {
-              return (
-                <div
-                  className="card"
-                  key={index}
-                  style={{ width: "18rem", margin: "1rem" }}
-                >
-                  <div className="card-body">
-                    <h5>課程名稱：{course.title}</h5>
-                    <p style={{ margin: "0.5rem 0rem" }}>
-                      課程敘述：{course.description}
-                    </p>
-                    <p style={{ margin: "0.5rem 0rem" }}>
-                      課程人數：{course.students.length}
-                    </p>
-                    <p style={{ margin: "0.5rem 0rem" }}>
-                      課程價格：{course.price}
-                    </p>
-                    <div
-                      className="buttons"
-                      style={{ display: "flex", justifyContent: "center" }}
-                    >
-                      <a
-                        href="#"
-                        className="card-text btn btn-primary"
-                        onClick={handleDrop}
-                        id={course._id}
-                      >
-                        退選課程
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+        {currentUser && currentUser.user.role === "instructor" && (
+          <div>
+            <h1>歡迎來到講師的課程頁面</h1>
           </div>
         )}
+      </div>
+
+      <div className="d-flex justify-content-center">
+        {currentUser &&
+          currentUser.user.role === "instructor" &&
+          courseData &&
+          courseData.length != 0 && (
+            <div style={{ display: "flex", flexWrap: "wrap" }}>
+              {courseData.map((course, index) => {
+                return (
+                  <div
+                    className="card"
+                    key={index}
+                    style={{ width: "18rem", margin: "1rem" }}
+                  >
+                    <div className="card-body">
+                      <h5>課程名稱：{course.title}</h5>
+                      <p style={{ margin: "0.5rem 0rem" }}>
+                        課程敘述：{course.description}
+                      </p>
+                      <p style={{ margin: "0.5rem 0rem" }}>
+                        課程人數：{course.students.length}
+                      </p>
+                      <p style={{ margin: "0.5rem 0rem" }}>
+                        課程價格：{course.price}
+                      </p>
+                      <div
+                        className="buttons"
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-around",
+                        }}
+                      >
+                        <a
+                          href="#"
+                          className="card-text btn btn-primary"
+                          onClick={handleUpdate}
+                          id={course._id}
+                        >
+                          更新課程
+                        </a>
+                        <a
+                          href="#"
+                          className="card-text btn btn-danger"
+                          onClick={handleDelete}
+                          id={course._id}
+                        >
+                          刪除課程
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
+        {currentUser &&
+          currentUser.user.role === "student" &&
+          courseData &&
+          courseData.length != 0 && (
+            <div style={{ display: "flex", flexWrap: "wrap" }}>
+              {courseData.map((course, index) => {
+                return (
+                  <div
+                    className="card"
+                    key={index}
+                    style={{ width: "18rem", margin: "1rem" }}
+                  >
+                    <div className="card-body">
+                      <h5>課程名稱：{course.title}</h5>
+                      <p style={{ margin: "0.5rem 0rem" }}>
+                        課程敘述：{course.description}
+                      </p>
+                      <p style={{ margin: "0.5rem 0rem" }}>
+                        課程人數：{course.students.length}
+                      </p>
+                      <p style={{ margin: "0.5rem 0rem" }}>
+                        課程價格：{course.price}
+                      </p>
+                      <div
+                        className="buttons"
+                        style={{ display: "flex", justifyContent: "center" }}
+                      >
+                        <a
+                          href="#"
+                          className="card-text btn btn-primary"
+                          onClick={handleDrop}
+                          id={course._id}
+                        >
+                          退選課程
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+      </div>
     </div>
   );
 };
