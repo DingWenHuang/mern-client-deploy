@@ -23,7 +23,7 @@ const PostCourseComponent = (props) => {
   };
   const postCourse = () => {
     setIsLoading(true);
-    CourseService.post(title, description, price)
+    CourseService.createCourse(title, description, price)
       .then(() => {
         setIsLoading(false);
         window.alert("新課程已創建成功");

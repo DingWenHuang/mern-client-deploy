@@ -17,7 +17,7 @@ class CourseService {
     return JSON.parse(localStorage.getItem("currentCourse"));
   }
 
-  post(title, description, price) {
+  createCourse(title, description, price) {
     return axios.post(
       API_URL,
       { title, description, price },

@@ -139,10 +139,6 @@ const EnrollComponent = (props) => {
     gettAllCourses();
   }, []);
 
-  // useEffect(() => {
-  //   handleSearch();
-  // }, [searchInput]);
-
   return (
     <div
       style={{
