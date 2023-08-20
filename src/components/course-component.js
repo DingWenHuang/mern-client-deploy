@@ -133,7 +133,13 @@ const CourseComponent = (props) => {
           currentUser.user.role === "instructor" &&
           courseData &&
           courseData.length != 0 && (
-            <div style={{ display: "flex", flexWrap: "wrap" }}>
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                justifyContent: "center",
+              }}
+            >
               {courseData.map((course, index) => {
                 return (
                   <div
@@ -187,7 +193,13 @@ const CourseComponent = (props) => {
           currentUser.user.role === "student" &&
           courseData &&
           courseData.length != 0 && (
-            <div style={{ display: "flex", flexWrap: "wrap" }}>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                flexWrap: "wrap",
+              }}
+            >
               {courseData.map((course, index) => {
                 return (
                   <div
