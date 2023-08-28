@@ -1,70 +1,43 @@
-# Getting Started with Create React App
+連結：<https://mern-practice-client.onrender.com/>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+(由於部屬在免費的 render.com 上，首次進入需花費約一分鐘等待服務啟動)
 
-## Available Scripts
 
-In the project directory, you can run:
+&nbsp;
 
-### `npm start`
+#### 專案簡介：
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+這個專案是一個學生與教職員課程系統，使用者可以註冊帳號並選擇身分。根據不同的身分，使用者可以執行不同的操作。
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+測試用帳號 - 講師：
 
-### `npm test`
+帳號：teacher1@test.com，密碼：teacher1
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+帳號：teacher2@test.com，密碼：teacher2
 
-### `npm run build`
+測試用帳號 - 學生：
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+帳號：student1@test.com，密碼：student1
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+帳號：student2@test.com，密碼：student2
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+&nbsp;
 
-### `npm run eject`
+#### 使用技術：
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- 前端：React
+- 後端：Express.js
+- 資料庫：MongoDB
+- 驗證方式：JWT
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+&nbsp;
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+#### 實作內容：
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- 提供使用者註冊、登入、登出功能
 
-## Learn More
+- 在個人頁面中，使用者可以更改名稱、信箱和密碼
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- 講師可以建立新課程，同時可以在課程頁面中進行修改和刪除操作
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- 學生可以搜尋課程並進行註冊，同時可以在課程頁面查看已註冊課程，並進行退選操作
