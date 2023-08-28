@@ -25,6 +25,7 @@ const RegisterComponent = (props) => {
     setRole(e.target.value);
   };
 
+  // 註冊
   const handleRegister = async () => {
     try {
       setIsLoading(true);
@@ -40,8 +41,11 @@ const RegisterComponent = (props) => {
 
   return (
     <div style={{ padding: "3rem" }} className="col-md-12">
+      {/* 如果有發生錯誤顯示錯誤訊息 */}
       {message && <div className="alert alert-danger">{message}</div>}
+
       <div>
+        {/* 產生註冊帳號表單與註冊按鈕 */}
         <div>
           <label htmlFor="username">用戶名稱:</label>
           <input
@@ -85,14 +89,6 @@ const RegisterComponent = (props) => {
             <option value="student">學生</option>
             <option value="instructor">講師</option>
           </select>
-
-          {/* <input
-            type="text"
-            onChange={handleRole}
-            className="form-control"
-            placeholder="只能填入student或是instructor這兩個選項其一"
-            name="role"
-          /> */}
         </div>
         <br />
         <button onClick={handleRegister} className="btn btn-primary">

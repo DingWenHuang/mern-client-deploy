@@ -21,10 +21,11 @@ const UpdateUserComponent = (props) => {
     setPassword(e.target.value);
   };
 
+  // 更新個人資料
   const handleUpdateUser = async () => {
     try {
       setIsLoading(true);
-      let updateResult = await AuthService.updateUserById(
+      await AuthService.updateUserById(
         currentUser.user._id,
         username,
         email,
@@ -41,29 +42,14 @@ const UpdateUserComponent = (props) => {
       setIsLoading(false);
       setMessage(error.response.data);
     }
-
-    // AuthService.updateUserById(currentUser.user._id, username, email)
-    //   .then(() => {
-    //     AuthService.logout();
-    //   })
-    //   .then(async () => {
-    //     let result = await AuthService.login(email, password);
-    //     localStorage.setItem("user", JSON.stringify(result.data));
-    //   })
-    //   .then(() => {
-    //     setCurrentUser(AuthService.getCurrentUser());
-    //     window.alert("個人資料更新成功");
-    //     navigate("/profile");
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //     setMessage(error.response.data);
-    //   });
   };
 
   return (
     <div style={{ padding: "3rem" }} className="col-md-12">
+      {/* 如果有發生錯誤顯示錯誤訊息 */}
       {message && <div className="alert alert-danger">{message}</div>}
+
+      {/* 提供更新個人資料表單，並確認密碼是否相符才進行更新 */}
       <div>
         <div>
           <label htmlFor="username">用戶名稱:</label>

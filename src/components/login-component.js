@@ -17,6 +17,7 @@ const LoginComponent = (props) => {
     setPassword(e.target.value);
   };
 
+  // 登入
   const handleLogin = async () => {
     try {
       setIsLoading(true);
@@ -34,6 +35,7 @@ const LoginComponent = (props) => {
 
   return (
     <div style={{ padding: "3rem" }} className="col-md-12">
+      {/* 如果有發生錯誤顯示錯誤訊息 */}
       {message && <div className="alert alert-danger">{message}</div>}
       <div>
         <div className="form-group">

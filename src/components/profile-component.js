@@ -7,6 +7,8 @@ const ProfileComponent = (props) => {
   return (
     <div style={{ padding: "3rem" }}>
       {!currentUser && <div>在獲取您的個人資料之前，您必須先登錄。</div>}
+
+      {/* 登入後顯示個人資料 */}
       {currentUser && (
         <div>
           <h2>以下是您的個人檔案：</h2>

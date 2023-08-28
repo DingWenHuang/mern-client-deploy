@@ -15,6 +15,7 @@ const CourseComponent = (props) => {
   let [courseData, setCourseData] = useState(null);
   let [message, setMessage] = useState("");
 
+  // 更新課程
   const handleUpdate = async (e) => {
     try {
       setIsLoading(true);
@@ -29,6 +30,7 @@ const CourseComponent = (props) => {
     }
   };
 
+  // 刪除課程
   const handleDelete = async (e) => {
     let confirmDelete = window.confirm("確定要刪除該課程?");
 
@@ -48,6 +50,7 @@ const CourseComponent = (props) => {
     }
   };
 
+  // 退選課程
   const handleDrop = async (e) => {
     let confirmDrop = window.confirm("確定要退選該課程?");
 
@@ -67,6 +70,7 @@ const CourseComponent = (props) => {
     }
   };
 
+  // 在進入頁面時，確認使用者身分，並取得課程資料
   useEffect(() => {
     let _id;
     if (currentUser) {
@@ -100,7 +104,7 @@ const CourseComponent = (props) => {
   return (
     <div style={{ padding: "3rem" }} className="col-md-12">
       {message && <div className="alert alert-danger">{message}</div>}
-
+      {/* 若沒登入則提供導向回登入頁面的按鈕 */}
       {!currentUser && (
         <div>
           <h5>在查看課程之前，您必須先登錄。</h5>
@@ -114,7 +118,6 @@ const CourseComponent = (props) => {
           </button>
         </div>
       )}
-
       <div className="d-flex justify-content-center">
         {currentUser && currentUser.user.role === "student" && (
           <div>
@@ -127,8 +130,8 @@ const CourseComponent = (props) => {
           </div>
         )}
       </div>
-
       <div className="d-flex justify-content-center">
+        {/* 顯示講師的課程 */}
         {currentUser &&
           currentUser.user.role === "instructor" &&
           courseData &&
@@ -188,7 +191,7 @@ const CourseComponent = (props) => {
               })}
             </div>
           )}
-
+        {/* 顯示學生的課程 */}
         {currentUser &&
           currentUser.user.role === "student" &&
           courseData &&

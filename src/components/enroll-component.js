@@ -13,12 +13,17 @@ const EnrollComponent = (props) => {
   );
   let [showAllCourses, setShowAllCourses] = useState(true);
 
+  // 導向回登入頁面
   const handleTakeToLogin = () => {
     navigate("/login");
   };
+
+  // 根據輸入內容更新要執行搜尋的關鍵字
   const handleChangeInput = (e) => {
     setSearchInput(e.target.value);
   };
+
+  // 根據排序方式更新課程排序
   const handleSorting = (e) => {
     setSort(e.target.value);
     let coursesForSorting;
@@ -62,6 +67,7 @@ const EnrollComponent = (props) => {
     }
   };
 
+  // 取得所有課程
   const gettAllCourses = async () => {
     try {
       setIsLoading(true);
@@ -69,13 +75,13 @@ const EnrollComponent = (props) => {
       setIsLoading(false);
       localStorage.setItem("allCourses", JSON.stringify(result.data));
       setAllCourses(JSON.parse(localStorage.getItem("allCourses")));
-      // console.log(allCourses);
     } catch (error) {
       setIsLoading(false);
       console.log(error);
     }
   };
 
+  // 根據搜尋結果更新課程
   const handleSearch = () => {
     if (!allCourses) {
       return;
@@ -87,33 +93,12 @@ const EnrollComponent = (props) => {
       ) {
         newArray.push(course);
       }
-      // course.title.includes(searchInput);
     });
-    // console.log(newArray);
     setSearchResult(newArray);
     setShowAllCourses(false);
-
-    // try {
-    //   setIsLoading(true);
-    //   let result = await CourseService.getCourseByName("", sort);
-    //   setIsLoading(false);
-    //   localStorage.setItem("allCourses", JSON.stringify(result.data));
-    //   setSearchResult(result.data);
-    // } catch (error) {
-    //   setIsLoading(false);
-    //   console.log(error);
-    // }
-    // try {
-    //   setIsLoading(true);
-    //   let result = await CourseService.getCourseByName(searchInput, sort);
-    //   setIsLoading(false);
-    //   localStorage.setItem("allCourses", JSON.stringify(result.data));
-    //   setSearchResult(result.data);
-    // } catch (error) {
-    //   setIsLoading(false);
-    //   console.log(error);
-    // }
   };
+
+  // 註冊課程
   const handleEnroll = async (e) => {
     try {
       setIsLoading(true);
@@ -131,10 +116,12 @@ const EnrollComponent = (props) => {
     }
   };
 
+  // 當搜尋內容改變時，執行搜尋
   useEffect(() => {
     handleSearch();
   }, [searchInput]);
 
+  // 進入頁面時，取得所有課程
   useEffect(() => {
     gettAllCourses();
   }, []);
@@ -148,6 +135,7 @@ const EnrollComponent = (props) => {
         alignItems: "center",
       }}
     >
+      {/* 先確認使用者是否有登入 */}
       {!currentUser && (
         <div>
           <p>您必須先登入才能夠搜尋課程</p>
@@ -159,6 +147,8 @@ const EnrollComponent = (props) => {
           </button>
         </div>
       )}
+
+      {/* 確認使用者是學生才能夠註冊課程 */}
       {currentUser && currentUser.user.role == "instructor" && (
         <div>
           <h1>只有學生才能夠註冊新課程</h1>
@@ -177,6 +167,7 @@ const EnrollComponent = (props) => {
         </div>
       )}
 
+      {/* 顯示搜尋結果 */}
       {currentUser && searchResult && searchResult.length != 0 && (
         <div className="d-flex flex-column align-items-center justify-content-center">
           <div
@@ -194,6 +185,7 @@ const EnrollComponent = (props) => {
                 justifyContent: "center",
               }}
             >
+              {/* 提供排序方式 */}
               <h5 style={{ margin: "1rem" }}>排序方式</h5>
               <select
                 className="form-control"
@@ -217,6 +209,7 @@ const EnrollComponent = (props) => {
               flexWrap: "wrap",
             }}
           >
+            {/* 顯示課程內容 */}
             {searchResult.map((course) => (
               <div
                 key={course._id}
@@ -248,6 +241,7 @@ const EnrollComponent = (props) => {
         </div>
       )}
 
+      {/* 顯示所有課程 */}
       {currentUser &&
         showAllCourses &&
         allCourses &&

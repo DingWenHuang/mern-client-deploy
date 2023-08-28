@@ -8,6 +8,7 @@ const NavComponent = (props) => {
 
   return (
     <div>
+      {/* 顯示載入中的圖示，避免使用者在等待時不知道發生了什麼事情 */}
       {isLoading && (
         <div
           style={{
@@ -34,6 +35,8 @@ const NavComponent = (props) => {
           />
         </div>
       )}
+
+      {/* 導覽列根據使用者是否登入以及不同身分顯示不同的選項 */}
       <nav>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <div className="container-fluid">

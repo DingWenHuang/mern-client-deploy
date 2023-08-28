@@ -12,6 +12,8 @@ const PostCourseComponent = (props) => {
   const handleTakeToLogin = () => {
     navigate("/login");
   };
+
+  // 將輸入的資料設定到state中
   const handleChangeTitle = (e) => {
     setTitle(e.target.value);
   };
@@ -21,6 +23,8 @@ const PostCourseComponent = (props) => {
   const handleChangePrice = (e) => {
     setPrice(e.target.value);
   };
+
+  // 發布新課程
   const postCourse = () => {
     setIsLoading(true);
     CourseService.createCourse(title, description, price)
@@ -37,6 +41,7 @@ const PostCourseComponent = (props) => {
 
   return (
     <div style={{ padding: "3rem" }}>
+      {/* 檢查使用者是否有登入 */}
       {!currentUser && (
         <div>
           <p>在發布新課程之前，您必須先登錄。</p>
@@ -48,11 +53,15 @@ const PostCourseComponent = (props) => {
           </button>
         </div>
       )}
+
+      {/* 確認使用者是講師才能發布新課程 */}
       {currentUser && currentUser.user.role !== "instructor" && (
         <div>
           <p>只有講師可以發布新課程。</p>
         </div>
       )}
+
+      {/* 提供講師發布新課程的表與發佈按鈕 */}
       {currentUser && currentUser.user.role == "instructor" && (
         <div className="form-group">
           <label htmlFor="exampleforTitle">課程標題：</label>

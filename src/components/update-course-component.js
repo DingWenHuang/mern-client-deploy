@@ -28,6 +28,7 @@ const UpdateCourseComponent = (props) => {
     setPrice(e.target.value);
   };
 
+  // 更新課程
   const handleUpdate = async () => {
     try {
       setIsLoading(true);
@@ -60,11 +61,15 @@ const UpdateCourseComponent = (props) => {
           </button>
         </div>
       )}
+
+      {/* 確認使用者是講師才能更新課程 */}
       {currentUser && currentUser.user.role !== "instructor" && (
         <div>
           <p>只有講師可以更新課程。</p>
         </div>
       )}
+
+      {/* 提供講師更新課程的表與更新按鈕，預先帶入原先的課程資料 */}
       {currentUser && currentUser.user.role == "instructor" && (
         <div className="form-group">
           <label htmlFor="exampleforTitle">課程標題：</label>
