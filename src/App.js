@@ -10,6 +10,7 @@ import EnrollComponent from "./components/enroll-component";
 import UpdateCourseComponent from "./components/update-course-component";
 import UpdateUserComponent from "./components/update-user-component";
 import UpdatePasswordComponent from "./components/update-password-component";
+import PageNotFound from "./components/page-not-found";
 
 import { useState } from "react";
 import authService from "./services/auth.service";
@@ -125,6 +126,7 @@ function App() {
                 />
               }
             />
+            <Route path="*" element={<PageNotFound />} />
           </Route>
         </Route>
       </Routes>
