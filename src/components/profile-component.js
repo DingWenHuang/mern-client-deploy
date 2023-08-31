@@ -6,7 +6,20 @@ const ProfileComponent = (props) => {
 
   return (
     <div style={{ padding: "3rem" }}>
-      {!currentUser && <div>在獲取您的個人資料之前，您必須先登錄。</div>}
+      {/* 若沒登入則提供導向回登入頁面的按鈕 */}
+      {!currentUser && (
+        <div>
+          <h5>在獲取您的個人資料之前，您必須先登錄。</h5>
+          <button
+            className="btn btn-primary btn-lg"
+            onClick={() => {
+              navigate("/login");
+            }}
+          >
+            回到登入頁面
+          </button>
+        </div>
+      )}
 
       {/* 登入後顯示個人資料 */}
       {currentUser && (

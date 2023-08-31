@@ -13,11 +13,6 @@ const EnrollComponent = (props) => {
   );
   let [showAllCourses, setShowAllCourses] = useState(true);
 
-  // 導向回登入頁面
-  const handleTakeToLogin = () => {
-    navigate("/login");
-  };
-
   // 根據輸入內容更新要執行搜尋的關鍵字
   const handleChangeInput = (e) => {
     setSearchInput(e.target.value);
@@ -135,13 +130,15 @@ const EnrollComponent = (props) => {
         alignItems: "center",
       }}
     >
-      {/* 先確認使用者是否有登入 */}
+      {/* 若沒登入則提供導向回登入頁面的按鈕 */}
       {!currentUser && (
         <div>
-          <p>您必須先登入才能夠搜尋課程</p>
+          <h5>您必須先登入才能夠搜尋課程</h5>
           <button
             className="btn btn-primary btn-lg"
-            onClick={handleTakeToLogin}
+            onClick={() => {
+              navigate("/login");
+            }}
           >
             回到登入頁面
           </button>

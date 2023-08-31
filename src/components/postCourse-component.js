@@ -9,9 +9,6 @@ const PostCourseComponent = (props) => {
   let [price, setPrice] = useState(0);
   let [message, setMessage] = useState("");
   const navigate = useNavigate();
-  const handleTakeToLogin = () => {
-    navigate("/login");
-  };
 
   // 將輸入的資料設定到state中
   const handleChangeTitle = (e) => {
@@ -41,15 +38,17 @@ const PostCourseComponent = (props) => {
 
   return (
     <div style={{ padding: "3rem" }}>
-      {/* 檢查使用者是否有登入 */}
+      {/* 若沒登入則提供導向回登入頁面的按鈕 */}
       {!currentUser && (
         <div>
-          <p>在發布新課程之前，您必須先登錄。</p>
+          <h5>在發布新課程之前，您必須先登錄。</h5>
           <button
             className="btn btn-primary btn-lg"
-            onClick={handleTakeToLogin}
+            onClick={() => {
+              navigate("/login");
+            }}
           >
-            帶我進入登錄頁面。
+            回到登入頁面
           </button>
         </div>
       )}
