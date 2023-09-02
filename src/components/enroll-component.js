@@ -165,81 +165,85 @@ const EnrollComponent = (props) => {
       )}
 
       {/* 顯示搜尋結果 */}
-      {currentUser && searchResult && searchResult.length != 0 && (
-        <div className="d-flex flex-column align-items-center justify-content-center">
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <h3>符合條件的課程清單</h3>
+      {currentUser &&
+        currentUser.user.role == "student" &&
+        searchResult &&
+        searchResult.length != 0 && (
+          <div className="d-flex flex-column align-items-center justify-content-center">
             <div
               style={{
                 display: "flex",
+                flexDirection: "column",
                 alignItems: "center",
-                justifyContent: "center",
               }}
             >
-              {/* 提供排序方式 */}
-              <h5 style={{ margin: "1rem" }}>排序方式</h5>
-              <select
-                className="form-control"
-                onChange={handleSorting}
-                style={{ width: "15rem", textAlign: "center" }}
+              <h3>符合條件的課程清單</h3>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
               >
-                <option value="date-desc">上架時間：由新到舊</option>
-                <option value="date-asc">上架時間：由舊到新</option>
-                <option value="students-desc">學生人數：由多到少</option>
-                <option value="students-asc">學生人數：由少到多</option>
-                <option value="price-desc">課程費用：由高到低</option>
-                <option value="price-asc">課程費用：由低到高</option>
-              </select>
+                {/* 提供排序方式 */}
+                <h5 style={{ margin: "1rem" }}>排序方式</h5>
+                <select
+                  className="form-control"
+                  onChange={handleSorting}
+                  style={{ width: "15rem", textAlign: "center" }}
+                >
+                  <option value="date-desc">上架時間：由新到舊</option>
+                  <option value="date-asc">上架時間：由舊到新</option>
+                  <option value="students-desc">學生人數：由多到少</option>
+                  <option value="students-asc">學生人數：由少到多</option>
+                  <option value="price-desc">課程費用：由高到低</option>
+                  <option value="price-asc">課程費用：由低到高</option>
+                </select>
+              </div>
+            </div>
+
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                flexWrap: "wrap",
+              }}
+            >
+              {/* 顯示課程內容 */}
+              {searchResult.map((course) => (
+                <div
+                  key={course._id}
+                  className="card"
+                  style={{ width: "18rem", margin: "0.5rem" }}
+                >
+                  <div className="card-body">
+                    <h5 className="card-title">課程名稱：{course.title}</h5>
+                    <p className="card-text">課程敘述：{course.description}</p>
+                    <p className="card-text">價格: {course.price}</p>
+                    <p className="card-text">
+                      講師: {course.instructor.username}
+                    </p>
+                    <p className="card-text">
+                      目前的學生人數: {course.studentLength}
+                    </p>
+                    <a
+                      href="#"
+                      onClick={handleEnroll}
+                      className="card-text btn btn-primary"
+                      id={course._id}
+                    >
+                      註冊課程
+                    </a>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              flexWrap: "wrap",
-            }}
-          >
-            {/* 顯示課程內容 */}
-            {searchResult.map((course) => (
-              <div
-                key={course._id}
-                className="card"
-                style={{ width: "18rem", margin: "0.5rem" }}
-              >
-                <div className="card-body">
-                  <h5 className="card-title">課程名稱：{course.title}</h5>
-                  <p className="card-text">課程敘述：{course.description}</p>
-                  <p className="card-text">價格: {course.price}</p>
-                  <p className="card-text">
-                    講師: {course.instructor.username}
-                  </p>
-                  <p className="card-text">
-                    目前的學生人數: {course.studentLength}
-                  </p>
-                  <a
-                    href="#"
-                    onClick={handleEnroll}
-                    className="card-text btn btn-primary"
-                    id={course._id}
-                  >
-                    註冊課程
-                  </a>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+        )}
 
       {/* 顯示所有課程 */}
       {currentUser &&
+        currentUser.user.role == "student" &&
         showAllCourses &&
         allCourses &&
         allCourses.length != 0 && (
